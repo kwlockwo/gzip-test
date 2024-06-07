@@ -5,6 +5,10 @@ const app = express();
 const port = process.env.PORT || 5050
 
 app.use(express.json());
+app.use((req, res, next) => {
+    console.log(JSON.stringify(req.headers));
+    next();
+});
 
 app.get('/compressed', compression(), function(req, res) {
     res.send('Hello World '.repeat(50000));
